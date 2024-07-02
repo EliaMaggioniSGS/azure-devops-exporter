@@ -44,17 +44,24 @@ type Tag struct {
 }
 
 type TimelineRecord struct {
-	RecordType   string  `json:"type"`
-	Name         string  `json:"name"`
-	Id           string  `json:"id"`
-	ParentId     string  `json:"parentId"`
-	ErrorCount   float64 `json:"errorCount"`
-	WarningCount float64 `json:"warningCount"`
-	Result       string  `json:"result"`
-	WorkerName   string  `json:"workerName"`
-	Identifier   string  `json:"identifier"`
+	RecordType   string           `json:"type"`
+	Name         string           `json:"name"`
+	Id           string           `json:"id"`
+	ParentId     string           `json:"parentId"`
+	ErrorCount   float64          `json:"errorCount"`
+	WarningCount float64          `json:"warningCount"`
+	Result       string           `json:"result"`
+	WorkerName   string           `json:"workerName"`
+	Identifier   string           `json:"identifier"`
+	Issues       []TimelineIssues `json:"issues"`
 	StartTime    time.Time
 	FinishTime   time.Time
+}
+
+type TimelineIssues struct {
+	Type     string `json:"type"`
+	Message  string `json:"message"`
+	Category string `json:"category"`
 }
 
 type Build struct {

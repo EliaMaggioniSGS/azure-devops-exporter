@@ -20,6 +20,7 @@ type (
 		Scrape struct {
 			Time              time.Duration  `long:"scrape.time"                  env:"SCRAPE_TIME"                    description:"Default scrape time (time.duration)"                       default:"30m"`
 			TimeProjects      *time.Duration `long:"scrape.time.projects"         env:"SCRAPE_TIME_PROJECTS"           description:"Scrape time for project metrics (time.duration)"`
+			TimeAgentPools    *time.Duration `long:"scrape.time.agentpools"       env:"SCRAPE_TIME_AGENTPOOLS"         description:"Scrape time for agent pool metrics (time.duration)"`
 			TimeRepository    *time.Duration `long:"scrape.time.repository"       env:"SCRAPE_TIME_REPOSITORY"         description:"Scrape time for repository metrics (time.duration)"`
 			TimeBuild         *time.Duration `long:"scrape.time.build"            env:"SCRAPE_TIME_BUILD"              description:"Scrape time for build metrics (time.duration)"`
 			TimeRelease       *time.Duration `long:"scrape.time.release"          env:"SCRAPE_TIME_RELEASE"            description:"Scrape time for release metrics (time.duration)"`
@@ -33,7 +34,8 @@ type (
 
 		// summary options
 		Stats struct {
-			SummaryMaxAge *time.Duration `long:"stats.summary.maxage"         env:"STATS_SUMMARY_MAX_AGE"             description:"Stats Summary metrics max age (time.duration)"`
+			SummaryMaxAge      *time.Duration `long:"stats.summary.maxage"         env:"STATS_SUMMARY_MAX_AGE"             description:"Stats Summary metrics max age (time.duration)"`
+			PipelineIssueRegex *string        `long:"stats.issue-regex"            env:"PIPELINE_ISSUE_REGEX"              description:"Regex to flag task specific tasks error (e.g. '.*timeout.*') (regexp)"`
 		}
 
 		// azure settings

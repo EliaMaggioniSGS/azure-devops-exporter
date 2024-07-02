@@ -9,7 +9,7 @@ RUN apk add --update build-base make git
 WORKDIR /go/src/github.com/webdevops/azure-devops-exporter
 
 # Dependencies
-COPY go.mod go.sum .
+COPY go.mod go.sum ./
 RUN go mod download
 
 # Compile

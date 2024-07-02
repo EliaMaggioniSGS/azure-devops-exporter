@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -629,6 +630,33 @@ func (m *MetricsCollectorBuild) collectBuildsTimeline(ctx context.Context, logge
 					"result":            timelineRecord.Result,
 					"type":              "duration",
 				}, timelineRecord.FinishTime.Sub(timelineRecord.StartTime))
+
+				if nil != opts.Stats.PipelineIssueRegex {
+					pipelineIssue := false
+					pipelineIssueRegex := regexp.MustCompile(*opts.Stats.PipelineIssueRegex)
+					for _, issue := range timelineRecord.Issues {
+						if issue.Type != "error" {
+							continue
+						}
+						if pipelineIssueRegex.MatchString(issue.Message) {
+							pipelineIssue = true
+							break
+						}
+					}
+
+					buildTaskMetric.AddBool(prometheus.Labels{
+						"projectID":         project.Id,
+						"buildID":           int64ToString(build.Id),
+						"buildDefinitionID": int64ToString(build.Definition.Id),
+						"buildNumber":       build.BuildNumber,
+						"name":              timelineRecord.Name,
+						"id":                timelineRecord.Id,
+						"parentId":          timelineRecord.ParentId,
+						"workerName":        timelineRecord.WorkerName,
+						"result":            timelineRecord.Result,
+						"type":              "pipelineIssue",
+					}, pipelineIssue)
+				}
 			}
 		}
 	}

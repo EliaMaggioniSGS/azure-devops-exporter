@@ -21,6 +21,7 @@ Application Options:
       --log.json                              Switch log output to json format [$LOG_JSON]
       --scrape.time=                          Default scrape time (time.duration) (default: 30m) [$SCRAPE_TIME]
       --scrape.time.projects=                 Scrape time for project metrics (time.duration) [$SCRAPE_TIME_PROJECTS]
+      --scrape.time.agentpools=               Scrape time for agent pool metrics (time.duration) [$SCRAPE_TIME_AGENTPOOLS]
       --scrape.time.repository=               Scrape time for repository metrics (time.duration) [$SCRAPE_TIME_REPOSITORY]
       --scrape.time.build=                    Scrape time for build metrics (time.duration) [$SCRAPE_TIME_BUILD]
       --scrape.time.release=                  Scrape time for release metrics (time.duration) [$SCRAPE_TIME_RELEASE]
@@ -31,6 +32,7 @@ Application Options:
       --scrape.time.query=                    Scrape time for query results  (time.duration) [$SCRAPE_TIME_QUERY]
       --scrape.time.live=                     Scrape time for live metrics (time.duration) (default: 30s) [$SCRAPE_TIME_LIVE]
       --stats.summary.maxage=                 Stats Summary metrics max age (time.duration) [$STATS_SUMMARY_MAX_AGE]
+      --stats.issue-regex=                    Stats Regex to flag task specific tasks error (e.g. '.*timeout.*') (regexp) [$PIPELINE_ISSUE_REGEX]
       --azure.tenant-id=                      Azure tenant ID for Service Principal authentication [$AZURE_TENANT_ID]
       --azure.client-id=                      Client ID for Service Principal authentication [$AZURE_CLIENT_ID]
       --azure.client-secret=                  Client secret for Service Principal authentication [$AZURE_CLIENT_SECRET]
@@ -101,7 +103,7 @@ Metrics
 | `azure_devops_build_stage`                     | build         | Build stage infos (duration, errors, warnings, started, finished time)                  |
 | `azure_devops_build_phase`                     | build         | Build phase infos (duration, errors, warnings, started, finished time)                  |
 | `azure_devops_build_job`                       | build         | Build job infos (duration, errors, warnings, started, finished time)                    |
-| `azure_devops_build_task`                      | build         | Build task infos (duration, errors, warnings, started, finished time)                   |
+| `azure_devops_build_task`                      | build         | Build task infos (duration, errors, warnings, started, finished time, pipelineIssue)                   |
 | `azure_devops_build_definition_info`           | build         | Build definition info                                                                   |
 | `azure_devops_release_info`                    | release       | Release informations                                                                    |
 | `azure_devops_release_artifact`                | release       | Release artifcact informations                                                          |
